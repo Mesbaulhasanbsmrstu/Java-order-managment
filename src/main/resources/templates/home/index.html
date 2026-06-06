@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Dashboard</h1>
+        <a class="btn btn-primary" th:href="@{/orders/create}">New Order</a>
+    </div>
+
+    <section class="metric-grid">
+        <div class="metric"><span>Suppliers</span><strong th:text="${supplierCount}">0</strong></div>
+        <div class="metric"><span>Fish Products</span><strong th:text="${fishProductCount}">0</strong></div>
+        <div class="metric"><span>Open Orders</span><strong th:text="${pendingOrderCount}">0</strong></div>
+        <div class="metric"><span>Inventory Kg</span><strong th:text="${#numbers.formatDecimal(inventoryKg, 1, 2)}">0.00</strong></div>
+        <div class="metric"><span>Sales Value</span><strong th:text="${#numbers.formatDecimal(salesValue, 1, 2)}">0.00</strong></div>
+    </section>
+
+    <div class="row g-3">
+        <section class="col-lg-6">
+            <div class="panel">
+                <h2 class="h5 mb-3">Low Stock Fish</h2>
+                <table class="table table-sm">
+                    <thead><tr><th>Name</th><th>Grade</th><th class="text-end">Kg</th></tr></thead>
+                    <tbody>
+                    <tr th:each="fish : ${lowStockFish}">
+                        <td th:text="${fish.name}">Hilsa</td>
+                        <td th:text="${fish.grade}">A</td>
+                        <td class="text-end" th:text="${#numbers.formatDecimal(fish.availableQuantityKg, 1, 2)}">0.00</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(lowStockFish)}"><td colspan="3">No low-stock fish.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="col-lg-6">
+            <div class="panel">
+                <h2 class="h5 mb-3">Recent Orders</h2>
+                <table class="table table-sm">
+                    <thead><tr><th>Customer</th><th>Status</th><th class="text-end">Total</th></tr></thead>
+                    <tbody>
+                    <tr th:each="order : ${recentOrders}">
+                        <td><a th:href="@{/orders/{id}(id=${order.id})}" th:text="${order.customer.name}">Customer</a></td>
+                        <td><span class="badge-status" th:text="${order.status}">CONFIRMED</span></td>
+                        <td class="text-end" th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)}">0.00</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(recentOrders)}"><td colspan="3">No orders yet.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

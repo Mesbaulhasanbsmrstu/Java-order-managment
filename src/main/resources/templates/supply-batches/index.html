@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Supply Batches')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Supply Batches</h1>
+        <a class="btn btn-primary" th:href="@{/supply-batches/create}">Receive Supply</a>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Date</th><th>Supplier</th><th>Fish</th><th class="text-end">Kg</th><th class="text-end">Cost / Kg</th><th>Storage</th></tr></thead>
+        <tbody>
+        <tr th:each="batch : ${batches}">
+            <td th:text="${batch.receivedDate}">2026-01-01</td>
+            <td th:text="${batch.supplier.name}">Supplier</td>
+            <td th:text="${batch.fishProduct.name}">Fish</td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(batch.quantityKg, 1, 2)}">0.00</td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(batch.costPerKg, 1, 2)}">0.00</td>
+            <td th:text="${batch.storageLocation}">Cold Storage</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

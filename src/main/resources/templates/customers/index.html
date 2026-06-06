@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Customers')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Customers</h1>
+        <a class="btn btn-primary" th:href="@{/customers/create}">Add Customer</a>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Name</th><th>Phone</th><th>Address</th></tr></thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.name}">Name</td>
+            <td th:text="${customer.phone}">Phone</td>
+            <td th:text="${customer.address}">Address</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

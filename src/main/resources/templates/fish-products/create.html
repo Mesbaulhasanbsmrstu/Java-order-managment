@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Add Fish')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell form-wrap">
+    <div class="page-title">
+        <h1>Add Fish</h1>
+        <a class="btn btn-outline-secondary" th:href="@{/fish-products}">Back</a>
+    </div>
+    <form th:action="@{/fish-products/create}" th:object="${fishProduct}" method="post" class="panel">
+        <div class="mb-3">
+            <label class="form-label" for="name">Fish Name</label>
+            <input class="form-control" id="name" th:field="*{name}">
+            <div class="text-danger" th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="category">Category</label>
+            <input class="form-control" id="category" th:field="*{category}">
+            <div class="text-danger" th:errors="*{category}"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label class="form-label" for="availableQuantityKg">Available Quantity (kg)</label>
+                <input class="form-control" id="availableQuantityKg" type="number" min="0" step="0.01" th:field="*{availableQuantityKg}">
+                <div class="text-danger" th:errors="*{availableQuantityKg}"></div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label" for="unitPrice">Selling Price / kg</label>
+                <input class="form-control" id="unitPrice" type="number" min="0.01" step="0.01" th:field="*{unitPrice}">
+                <div class="text-danger" th:errors="*{unitPrice}"></div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label" for="grade">Grade</label>
+                <input class="form-control" id="grade" th:field="*{grade}">
+                <div class="text-danger" th:errors="*{grade}"></div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

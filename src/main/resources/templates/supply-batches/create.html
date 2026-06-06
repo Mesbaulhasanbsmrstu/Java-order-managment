@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Receive Supply')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell form-wrap">
+    <div class="page-title">
+        <h1>Receive Supply</h1>
+        <a class="btn btn-outline-secondary" th:href="@{/supply-batches}">Back</a>
+    </div>
+    <form th:action="@{/supply-batches/create}" th:object="${supplyBatchForm}" method="post" class="panel">
+        <div class="mb-3">
+            <label class="form-label" for="supplierId">Supplier</label>
+            <select class="form-select" id="supplierId" th:field="*{supplierId}">
+                <option value="">Select supplier</option>
+                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}">Supplier</option>
+            </select>
+            <div class="text-danger" th:errors="*{supplierId}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="fishProductId">Fish</label>
+            <select class="form-select" id="fishProductId" th:field="*{fishProductId}">
+                <option value="">Select fish</option>
+                <option th:each="fish : ${fishProducts}" th:value="${fish.id}" th:text="${fish.name}">Fish</option>
+            </select>
+            <div class="text-danger" th:errors="*{fishProductId}"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="quantityKg">Quantity (kg)</label>
+                <input class="form-control" id="quantityKg" type="number" min="0.01" step="0.01" th:field="*{quantityKg}">
+                <div class="text-danger" th:errors="*{quantityKg}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="costPerKg">Cost / kg</label>
+                <input class="form-control" id="costPerKg" type="number" min="0.01" step="0.01" th:field="*{costPerKg}">
+                <div class="text-danger" th:errors="*{costPerKg}"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="receivedDate">Received Date</label>
+                <input class="form-control" id="receivedDate" type="date" th:field="*{receivedDate}">
+                <div class="text-danger" th:errors="*{receivedDate}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="storageLocation">Storage Location</label>
+                <input class="form-control" id="storageLocation" th:field="*{storageLocation}">
+                <div class="text-danger" th:errors="*{storageLocation}"></div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

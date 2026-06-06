@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('New Order')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell form-wrap">
+    <div class="page-title">
+        <h1>New Order</h1>
+        <a class="btn btn-outline-secondary" th:href="@{/orders}">Back</a>
+    </div>
+    <form th:action="@{/orders/create}" th:object="${createOrderForm}" method="post" class="panel">
+        <div class="mb-3">
+            <label class="form-label" for="customerId">Customer</label>
+            <select class="form-select" id="customerId" th:field="*{customerId}">
+                <option value="">Select customer</option>
+                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Customer</option>
+            </select>
+            <div class="text-danger" th:errors="*{customerId}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="fishProductId">Fish</label>
+            <select class="form-select" id="fishProductId" th:field="*{fishProductId}">
+                <option value="">Select fish</option>
+                <option th:each="fish : ${fishProducts}"
+                        th:value="${fish.id}"
+                        th:text="${fish.name + ' - ' + #numbers.formatDecimal(fish.availableQuantityKg, 1, 2) + ' kg @ ' + #numbers.formatDecimal(fish.unitPrice, 1, 2)}">Fish</option>
+            </select>
+            <div class="text-danger" th:errors="*{fishProductId}"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="quantityKg">Quantity (kg)</label>
+                <input class="form-control" id="quantityKg" type="number" min="0.01" step="0.01" th:field="*{quantityKg}">
+                <div class="text-danger" th:errors="*{quantityKg}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label" for="deliveryDate">Delivery Date</label>
+                <input class="form-control" id="deliveryDate" type="date" th:field="*{deliveryDate}">
+                <div class="text-danger" th:errors="*{deliveryDate}"></div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="deliveryAddress">Delivery Address</label>
+            <input class="form-control" id="deliveryAddress" th:field="*{deliveryAddress}">
+            <div class="text-danger" th:errors="*{deliveryAddress}"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Create Order</button>
+    </form>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

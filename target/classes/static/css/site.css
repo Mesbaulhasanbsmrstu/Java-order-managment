@@ -1,0 +1,86 @@
+body {
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.app-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.navbar {
+    background: #0f766e;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #fff;
+}
+
+.navbar .nav-link:hover {
+    color: #ccfbf1;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.metric {
+    background: #fff;
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.metric span {
+    display: block;
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+.metric strong {
+    display: block;
+    font-size: 1.55rem;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+.table {
+    background: #fff;
+}
+
+.form-wrap {
+    max-width: 760px;
+}
+
+.field-validation-error,
+.text-danger {
+    color: #b91c1c;
+}
+
+.badge-status {
+    background: #e0f2fe;
+    color: #075985;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}

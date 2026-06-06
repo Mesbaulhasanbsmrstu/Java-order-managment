@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Add Supplier')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell form-wrap">
+    <div class="page-title">
+        <h1>Add Supplier</h1>
+        <a class="btn btn-outline-secondary" th:href="@{/suppliers}">Back</a>
+    </div>
+    <form th:action="@{/suppliers/create}" th:object="${supplier}" method="post" class="panel">
+        <div class="mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" id="name" th:field="*{name}">
+            <div class="text-danger" th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="contactPerson">Contact Person</label>
+            <input class="form-control" id="contactPerson" th:field="*{contactPerson}">
+            <div class="text-danger" th:errors="*{contactPerson}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="phone">Phone</label>
+            <input class="form-control" id="phone" th:field="*{phone}">
+            <div class="text-danger" th:errors="*{phone}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="landingStation">Landing Station</label>
+            <input class="form-control" id="landingStation" th:field="*{landingStation}">
+            <div class="text-danger" th:errors="*{landingStation}"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

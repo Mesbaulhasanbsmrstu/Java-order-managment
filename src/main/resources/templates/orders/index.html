@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Orders')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Orders</h1>
+        <a class="btn btn-primary" th:href="@{/orders/create}">New Order</a>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Order Date</th><th>Customer</th><th>Delivery</th><th>Status</th><th class="text-end">Total</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.orderDate}">2026-01-01</td>
+            <td th:text="${order.customer.name}">Customer</td>
+            <td th:text="${order.deliveryDate}">2026-01-02</td>
+            <td><span class="badge-status" th:text="${order.status}">CONFIRMED</span></td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)}">0.00</td>
+            <td class="text-end"><a class="btn btn-sm btn-outline-primary" th:href="@{/orders/{id}(id=${order.id})}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

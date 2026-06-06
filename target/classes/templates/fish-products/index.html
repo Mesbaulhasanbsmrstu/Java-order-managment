@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Fish Products')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Fish Products</h1>
+        <a class="btn btn-primary" th:href="@{/fish-products/create}">Add Fish</a>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Name</th><th>Category</th><th>Grade</th><th class="text-end">Available Kg</th><th class="text-end">Price / Kg</th></tr></thead>
+        <tbody>
+        <tr th:each="fish : ${fishProducts}">
+            <td th:text="${fish.name}">Hilsa</td>
+            <td th:text="${fish.category}">Sea Fish</td>
+            <td th:text="${fish.grade}">A</td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(fish.availableQuantityKg, 1, 2)}">0.00</td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(fish.unitPrice, 1, 2)}">0.00</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

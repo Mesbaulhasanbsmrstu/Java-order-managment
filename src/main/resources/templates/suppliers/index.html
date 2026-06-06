@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Suppliers')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="app-shell">
+    <div class="page-title">
+        <h1>Suppliers</h1>
+        <a class="btn btn-primary" th:href="@{/suppliers/create}">Add Supplier</a>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Name</th><th>Contact</th><th>Phone</th><th>Landing Station</th></tr></thead>
+        <tbody>
+        <tr th:each="supplier : ${suppliers}">
+            <td th:text="${supplier.name}">Name</td>
+            <td th:text="${supplier.contactPerson}">Contact</td>
+            <td th:text="${supplier.phone}">Phone</td>
+            <td th:text="${supplier.landingStation}">Station</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>
