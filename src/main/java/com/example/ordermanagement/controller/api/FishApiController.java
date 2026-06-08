@@ -50,9 +50,9 @@ public class FishApiController {
     public FishDto getSupplierById(
             @Parameter(description = "ID of the fish product to fetch", required = true)
             @PathVariable Integer id) {
-        FishProduct fish = fishRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier not found with ID: " + id));
-        return convertToDto(fish);
+        FishDto fish = fishRepository.findDtoById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fish product not found with ID: " + id));
+        return fish;
     }
 
     @PostMapping
